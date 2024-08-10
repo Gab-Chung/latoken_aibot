@@ -74,10 +74,14 @@ async def welcome(message: types.Message):
 @dp.message_handler()
 async def gpt(message: types.Message):
     # Retrieve relevant information from the JSON dataset
-    relevant_info = retrieve_relevant_info(message.text, data)
+    # relevant_info = retrieve_relevant_info(message.text, data)
 
     # Combine the retrieved information into a single string
-    retrieved_text = "\n".join([json.dumps(info) for info in relevant_info])
+    retrieved_text = ""
+    for _, item in data.items():
+        # Check if any of the fields in the JSON item match the query
+        for _, line in item.items():
+            retrieved_text += line
 
     # Combine retrieved text with PDF text
     combined_text = f"Retrieved Information: {retrieved_text}\n\nPDF Information: {combined_pdf_text}"
