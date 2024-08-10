@@ -1,6 +1,6 @@
 # latoken ai bot
 
-This is the first version solving level 2 difficulty
+This is the second version solving level 3 difficulty
 
 ## Usage
 
