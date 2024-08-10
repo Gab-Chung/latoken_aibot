@@ -42,30 +42,6 @@ with open("./culture.json") as json_file:
     data = json.load(json_file)
 
 
-def compare_texts(text1, text2):
-    # Split the texts into sets of words
-    words_text1 = set(text1.lower().split())
-    words_text2 = set(text2.lower().split())
-
-    # Find the intersection of both sets (common words)
-    common_words = words_text1.intersection(words_text2)
-
-    # Return True if there are any common words, False otherwise
-    return bool(common_words)
-
-
-# Function to retrieve relevant information from the JSON dataset
-def retrieve_relevant_info(query, data):
-    relevant_info = []
-    for _, item in data.items():
-        # Check if any of the fields in the JSON item match the query
-        for _, line in item.items():
-            if compare_texts(query, line):
-                print("found match!\n")
-                relevant_info.append(line)
-    return relevant_info
-
-
 @dp.message_handler(commands=["start", "help"])
 async def welcome(message: types.Message):
     await message.reply("Hello! I am Latoken AI assistant, ask me something.")
@@ -73,9 +49,6 @@ async def welcome(message: types.Message):
 
 @dp.message_handler()
 async def gpt(message: types.Message):
-    # Retrieve relevant information from the JSON dataset
-    # relevant_info = retrieve_relevant_info(message.text, data)
-
     # Combine the retrieved information into a single string
     retrieved_text = ""
     for _, item in data.items():
